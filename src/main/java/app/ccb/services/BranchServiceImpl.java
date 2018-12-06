@@ -38,8 +38,7 @@ public class BranchServiceImpl implements BranchService {
 
     @Override
     public String readBranchesJsonFile() throws IOException {
-        String branchesFromJson = fileUtil.readFile(Constants.BRANCHES_JSON_PATH);
-        return branchesFromJson;
+        return fileUtil.readFile(Constants.BRANCHES_JSON_PATH);
     }
 
     @Override

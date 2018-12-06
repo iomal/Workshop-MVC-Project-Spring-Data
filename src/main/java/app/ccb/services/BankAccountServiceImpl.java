@@ -4,11 +4,8 @@ import app.ccb.config.common.constants.Constants;
 import app.ccb.config.common.parsers.JaxbParser;
 import app.ccb.config.common.util.FileUtil;
 import app.ccb.config.common.util.ValidationUtil;
-import app.ccb.domain.dtos.BankAccountDTO;
-import app.ccb.domain.dtos.BankAccountImportDTO;
-import app.ccb.domain.dtos.BranchImportDTO;
+import app.ccb.domain.dtos.BankAccountRootDTO;
 import app.ccb.domain.entities.BankAccount;
-import app.ccb.domain.entities.Card;
 import app.ccb.domain.entities.Client;
 import app.ccb.repositories.BankAccountRepository;
 import app.ccb.repositories.ClientRepository;
@@ -18,8 +15,6 @@ import org.springframework.stereotype.Service;
 
 import javax.xml.bind.JAXBException;
 import java.io.IOException;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @Service
 public class BankAccountServiceImpl implements BankAccountService {
@@ -56,11 +51,11 @@ public class BankAccountServiceImpl implements BankAccountService {
 
     @Override
     public String importBankAccounts() throws IOException, JAXBException {
-        BankAccountDTO bankAccountDTOs = new BankAccountDTO();
-        bankAccountDTOs = jaxbParser.toString(Constants.BANK_ACCOUNT_XML_FULL_PATH, BankAccountDTO.class);
+        BankAccountRootDTO bankAccountRootDTOs = jaxbParser.toString(Constants.BANK_ACCOUNT_XML_FULL_PATH,
+                BankAccountRootDTO.class);
         StringBuilder importResult = new StringBuilder();
 
-        bankAccountDTOs.getBankAccountImportDTOs().stream().forEach(bankAccountImportDTO -> {
+        bankAccountRootDTOs.getBankAccountImportDTOs().forEach(bankAccountImportDTO -> {
 
             if (!validator.isValid(bankAccountImportDTO)) {
                 importResult.append("Error: Incorrect Data!");

@@ -1,9 +1,6 @@
 package app.ccb.domain.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Set;
 
@@ -18,7 +15,7 @@ public class BankAccount extends BaseEntity{
     @OneToOne
     private Client client;
 
-    @OneToMany(mappedBy = "bankAccount")
+    @OneToMany(mappedBy = "bankAccount", fetch = FetchType.LAZY)
     private Set<Card> cards;
 
     public BankAccount() {
@@ -56,5 +53,13 @@ public class BankAccount extends BaseEntity{
         this.cards = cards;
     }
 
-
+    @Override
+    public String toString() {
+       StringBuilder cardsString = new StringBuilder();
+       cardsString.append("\n");
+        cards.forEach(card -> cardsString.append(card).append("\n"));
+        return
+                accountNumber + '\n' +
+                "Cards: " + cardsString;
+    }
 }

@@ -10,7 +10,7 @@ public class Branch extends BaseEntity{
     @NotNull
     private String name;
 
-    @OneToMany (mappedBy = "branch")
+    @OneToMany (mappedBy = "branch", fetch = FetchType.LAZY)
     private Set<Employee> employee;
 
     public Branch() {
@@ -33,5 +33,12 @@ public class Branch extends BaseEntity{
 
     public void setEmployee(Set<Employee> employee) {
         this.employee = employee;
+    }
+
+    @Override
+    public String toString() {
+        return "      branch: " +
+                 name + '\n'
+              ;
     }
 }

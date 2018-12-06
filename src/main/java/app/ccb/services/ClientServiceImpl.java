@@ -11,8 +11,12 @@ import app.ccb.repositories.ClientRepository;
 import app.ccb.repositories.EmployeeRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.awt.print.PageFormat;
+import java.awt.print.Pageable;
+import java.awt.print.Printable;
 import java.io.IOException;
 
 @Service
@@ -67,10 +71,11 @@ public class ClientServiceImpl implements ClientService {
                 importResult.append(System.lineSeparator());
                 continue;
             }
-            if (this.clientRepository.findByFullName(client.getFullName()).isPresent()) {
-                this.clientRepository.findByFullName(client.getFullName()).get().addEmployee(employee);
+            Client clientExist =this.clientRepository.findByFullName(client.getFullName()).orElse(null);
+            if (clientExist!=null) {
+                clientExist.getEmployees().add(employee);
             } else {
-                this.clientRepository.saveAndFlush(client);
+                this.clientRepository.save(client);
             }
             importResult.append(String.format("Successfully imported %s – %s.",
                     client.getClass().getSimpleName(), client.getFullName()));
@@ -81,8 +86,7 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public String exportFamilyGuy() {
-        // TODO : Implement Me
-        return null;
+        return this.clientRepository.familyGuy(new PageRequest(0,1)).get(0).toString();
     }
 
 }

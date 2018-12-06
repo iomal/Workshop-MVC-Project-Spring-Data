@@ -11,6 +11,7 @@ public class Client {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long id;
+
     @NotNull
     private String fullName;
     private Integer age;
@@ -18,7 +19,7 @@ public class Client {
     @OneToOne(mappedBy = "client")
     private BankAccount bankAccount;
 
-    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @ManyToMany
 //    @JoinTable(name = "clients_employees",
 //            joinColumns = @JoinColumn(name = "client_id"),
 //            inverseJoinColumns = @JoinColumn(name = "employee_id")
@@ -72,14 +73,9 @@ public class Client {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Client)) return false;
-        return id!= null && id.equals(((Client) o).id);
-    }
-
-    @Override
-    public int hashCode() {
-        return 31;
+    public String toString() {
+        return "Client id=" + id +"\n"+ fullName + '\n' +
+                "      age: " + age +"\n"+
+                "      bank account: " + bankAccount+"\n";
     }
 }

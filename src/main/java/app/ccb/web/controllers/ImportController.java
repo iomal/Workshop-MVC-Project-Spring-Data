@@ -113,7 +113,7 @@ public class ImportController extends BaseController {
     }
 
     @GetMapping("/cards")
-    public ModelAndView importCards() throws IOException {
+    public ModelAndView importCards() throws IOException, JAXBException {
         String cardXmlFile = this.cardService.readCardsXmlFile();
         return super.view("xml/import-cards", "cards", cardXmlFile);
     }

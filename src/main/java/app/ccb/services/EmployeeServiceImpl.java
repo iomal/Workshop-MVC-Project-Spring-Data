@@ -75,13 +75,13 @@ public class EmployeeServiceImpl implements EmployeeService {
             importResult.append(System.lineSeparator());
                     }
         String result = importResult.toString().trim();
-        System.out.println(result);
         return result;
     }
 
     @Override
     public String exportTopEmployees() {
-        // TODO : Implement Me
-        return null;
+        StringBuilder emplyees=new StringBuilder();
+        this.employeeRepository.employeesByClients().forEach(emplyees::append);
+        return emplyees.toString();
     }
 }

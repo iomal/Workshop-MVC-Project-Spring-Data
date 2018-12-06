@@ -1,10 +1,13 @@
 package app.ccb.services;
 
+import javax.xml.bind.JAXBException;
+import java.io.IOException;
+
 public interface CardService {
 
     Boolean cardsAreImported();
 
-    String readCardsXmlFile();
+    String readCardsXmlFile() throws IOException, JAXBException;
 
-    String importCards();
+    String importCards() throws JAXBException;
 }

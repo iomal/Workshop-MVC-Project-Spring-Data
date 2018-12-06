@@ -24,7 +24,7 @@ public class Employee {
 
     private LocalDate startedOn;
 
-    @ManyToOne( cascade = {CascadeType.MERGE,CascadeType.PERSIST})
+    @ManyToOne(cascade = {CascadeType.MERGE,CascadeType.PERSIST})
     @NotNull
     private Branch branch;
 
@@ -84,14 +84,10 @@ public class Employee {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Employee)) return false;
-        return id != null && id.equals(((Employee) o).id);
-    }
-
-    @Override
-    public int hashCode() {
-        return 31;
+    public String toString() {
+        return "Employee id = " + id +"\n"+ firstName + " " + lastName + "\n"+
+                "      salary: " + String.format("%.2f",salary) +"\n"+
+                "      startedOn: " + startedOn + "\n"+ branch +
+                "      clients number: " + clients.size()+"\n"+"\n";
     }
 }

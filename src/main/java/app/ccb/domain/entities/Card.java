@@ -1,5 +1,7 @@
 package app.ccb.domain.entities;
 
+import app.ccb.domain.Enums.CardStatus;
+
 import javax.persistence.*;
 
 @Entity(name = "card")
@@ -9,8 +11,8 @@ public class Card extends BaseEntity {
     private String cardNumber;
 
     @Enumerated (EnumType.STRING)
-    @Column (length=7)
-    private Enum cardStatus;
+    @Column (name="card_status")
+    private CardStatus cardStatus;
 
     @ManyToOne
     private BankAccount bankAccount;
@@ -26,9 +28,9 @@ public class Card extends BaseEntity {
         this.cardNumber = cardNumber;
     }
 
-    public Enum getCardStatus() { return this.cardStatus; }
+    public CardStatus getCardStatus() { return this.cardStatus; }
 
-    public void setCardStatus(Enum cardStatus) {
+    public void setCardStatus(CardStatus cardStatus) {
         this.cardStatus = cardStatus;
     }
 
@@ -39,5 +41,11 @@ public class Card extends BaseEntity {
     public void setBankAccount(BankAccount bankAccount) {
         this.bankAccount = bankAccount;
     }
+
+    @Override
+    public String toString() {
+        return  "      card number: " + cardNumber + '\n' +
+                "      card status: " + cardStatus + "\n";
     }
+}
 

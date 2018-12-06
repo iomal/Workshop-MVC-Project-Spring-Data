@@ -10,12 +10,12 @@ import java.io.Serializable;
 
 @XmlRootElement(name = "bank-accounts")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class BankAccountDTO {
+public class BankAccountRootDTO {
 
     @XmlElement(name = "bank-account")
     private List<BankAccountImportDTO> bankAccountImportDTOs;
 
-    public BankAccountDTO() {
+    public BankAccountRootDTO() {
     }
 
     public List<BankAccountImportDTO> getBankAccountImportDTOs() {
