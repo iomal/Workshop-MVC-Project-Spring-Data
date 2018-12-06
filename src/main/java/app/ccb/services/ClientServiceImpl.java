@@ -61,6 +61,14 @@ public class ClientServiceImpl implements ClientService {
                 importResult.append("Error: Incorrect Data!");
                 continue;
             }
+            Client clientnew=this.clientRepository.findById(1L).orElse(null);
+            if(clientnew!=null)
+            System.out.println(clientnew.hashCode());
+            System.out.println(clientnew);
+            Client clientnew2= this.clientRepository.findById(1L).orElse(null);
+            if(clientnew2!=null)
+            System.out.println(clientnew2.hashCode());
+            System.out.println(clientnew2);
             Client client = mapper.map(importDTO, Client.class);
             String firstName = importDTO.getEmployeeName().split("\\s+")[0];
             String lastName = importDTO.getEmployeeName().split("\\s+")[1];

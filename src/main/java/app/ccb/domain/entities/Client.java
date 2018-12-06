@@ -72,10 +72,10 @@ public class Client {
         employee.getClients().remove(this);
     }
 
-    @Override
-    public String toString() {
-        return "Client id=" + id +"\n"+ fullName + '\n' +
-                "      age: " + age +"\n"+
-                "      bank account: " + bankAccount+"\n";
-    }
+//    @Override
+//    public String toString() {
+//        return "Client id=" + id +"\n"+ fullName + '\n' +
+//                "      age: " + age +"\n"+
+//                "      bank account: " + bankAccount+"\n";
+//    }
 }
